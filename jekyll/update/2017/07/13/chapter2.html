@@ -95,7 +95,7 @@
 <h3 id="difficulty-nonce-and-the-proof-of-work-puzzle">Difficulty, nonce and the proof-of-work puzzle</h3>
 <p>We will add two new properties to the block structure: <code>difficulty</code> and <code>nonce</code>. To understand the meaning of those, we must first introduce the Proof-of-work puzzle.</p>
 
-<p>The Proof-of-work puzzle is to find a block hash, that has a specific number of zeroes prefixing it. The <code>difficulty</code> property defines <strong>how many prefixing zeroes the block hash must have</strong>, in order for the block to be valid. The prefixing zeroes are checked from the binary format of the hash.</p>
+<p>The Proof-of-work puzzle is to find a block hash, that has a specific number of zeros prefixing it. The <code>difficulty</code> property defines <strong>how many prefixing zeros the block hash must have</strong>, in order for the block to be valid. The prefixing zeros are checked from the binary format of the hash.</p>
 
 <p>Below are some examples of valid and non-valid hashes for various difficulties:</p>
 
@@ -154,7 +154,7 @@
 <p>When the block is found, it is broadcasted to the network as was the case in chapter1.</p>
 
 <h3 id="consensus-on-the-difficulty">Consensus on the difficulty</h3>
-<p>We have now the means to find and verify the hash for a given difficulty, but how is the difficulty determined? There must be a way for the nodes to agree what the current difficulty is. For this we introduce some new rules that we use to calcuate the <em>current</em>  difficulty of the network.</p>
+<p>We have now the means to find and verify the hash for a given difficulty, but how is the difficulty determined? There must be a way for the nodes to agree what the current difficulty is. For this we introduce some new rules that we use to calculate the <em>current</em>  difficulty of the network.</p>
 
 <p>Lets define the following new constants for the network:</p>
 <ul>
@@ -162,7 +162,7 @@
   <li><code>DIFFICULTY_ADJUSTMENT_INTERVAL</code>, defines how often the difficulty should adjust to the increasing or decreasing network hashrate. (in Bitcoin this value is 2016 blocks)</li>
 </ul>
 
-<p>We will set the block generation interval to 10s and difficulty adjustement to 10 blocks. These constants <strong>do not change</strong> over time and they are hard coded.</p>
+<p>We will set the block generation interval to 10s and difficulty adjustment to 10 blocks. These constants <strong>do not change</strong> over time and they are hard coded.</p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="c1">// in seconds</span>
 <span class="kr">const</span> <span class="nx">BLOCK_GENERATION_INTERVAL</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
@@ -214,14 +214,14 @@
 <h3 id="cumulative-difficulty">Cumulative difficulty</h3>
 <p>In the chapter1 version of the blockchain, we chose always the “longest” blockchain to be the valid. This must change now that difficulty is introduced. For now on the “correct” chain is not the “longest” chain, but the chain with the <strong>most cumulative difficulty</strong>. In other words, the correct chain is the chain which required most resources (= hashRate * time) to produce.</p>
 
-<p>To get the cumulative difficulty of a chain we calculate <code>2^difficulty</code> for each block and take a sum of all those numbers. We have to use the <code>2^difficulty</code> as we chose the difficulty to represent the number of zeroes that must prefix the hash in binary format. For instance, if we compare the difficulties of 5 and 11, it requires 2^(11-5) = 2^6 times more work to find a block with latter difficulty.</p>
+<p>To get the cumulative difficulty of a chain we calculate <code>2^difficulty</code> for each block and take a sum of all those numbers. We have to use the <code>2^difficulty</code> as we chose the difficulty to represent the number of zeros that must prefix the hash in binary format. For instance, if we compare the difficulties of 5 and 11, it requires 2^(11-5) = 2^6 times more work to find a block with latter difficulty.</p>
 
 <p>In the below example, the “Chain B” is the “correct” chain although it has fever blocks:
 <img src="/assets/Cumulative_difficulties.png" alt="Cumulative difficulty" /></p>
 
 <p>Only the difficulty of the block matters, not the actual hash (given the hash is valid). For example, if the difficulty is 4 and the block hash is 000000a34c… (= also satisfying the difficulty of 6), only the difficulty of 4 is taken into account when calculating the cumulative difficulty.</p>
 
-<p>This property is also known as “Nakamoto consensus” and it is one of the most important inventions Satoshi made, when s/he invented Bitcoin. In case of forks, miners must choose on which chain the they decide put their current resources (= hashRate). As it is in the interest of the miners to produce such block that will be included in the blockchain, the miners are incentiviced to eventually to choose the same chain.</p>
+<p>This property is also known as “Nakamoto consensus” and it is one of the most important inventions Satoshi made, when s/he invented Bitcoin. In case of forks, miners must choose on which chain the they decide put their current resources (= hashRate). As it is in the interest of the miners to produce such block that will be included in the blockchain, the miners are incentivized to eventually to choose the same chain.</p>
 
 <h3 id="conclusions">Conclusions</h3>
 <p>An important property that a Proof-of-work puzzle must have is that it is difficult to solve, but easy to verify. Finding specific SHA256 hashes is a good and simple example of such problem.</p>

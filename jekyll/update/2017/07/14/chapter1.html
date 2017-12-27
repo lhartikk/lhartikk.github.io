@@ -128,7 +128,7 @@
 <span class="p">}</span></code></pre></figure>
 
 <h3 id="block-hash">Block hash</h3>
-<p>The block hash is one of the most important property of the block. The hash is calculated over all data of the block. This means that if anything in the block changes, the original hash is no longer valid. The block hash can also be tought as the unique identifier of the block. For instance, blocks with same index can appear, but they all have unique hashes.</p>
+<p>The block hash is one of the most important property of the block. The hash is calculated over all data of the block. This means that if anything in the block changes, the original hash is no longer valid. The block hash can also be thought as the unique identifier of the block. For instance, blocks with same index can appear, but they all have unique hashes.</p>
 
 <p>We calculate the hash of the block using the following code:</p>
 
@@ -137,13 +137,13 @@
 
 <p>It should be noted that the block hash has not yet nothing to do with <a href="https://en.bitcoin.it/wiki/Mining">mining</a>, as there is no <a href="https://en.wikipedia.org/wiki/Proof-of-work_system">proof-of-work</a> problem to solve. We use block hashes to preserve integrity of the block and to explicitly reference the previous block.</p>
 
-<p>An important consequence of the properties <code>hash</code> and <code>previousHash</code> is that a block can’t be modified without changing the hash of <em>every</em> consequentive block.</p>
+<p>An important consequence of the properties <code>hash</code> and <code>previousHash</code> is that a block can’t be modified without changing the hash of <em>every</em> consecutive block.</p>
 
-<p>This is demonstrated in the example below. If the data in block 44 is changed from “DESERT” to “STREET”, all hashes of the consequentive blocks must be changed. This is because the <code>hash</code> of the block depends on the value of the <code>previousHash</code> (among other things).</p>
+<p>This is demonstrated in the example below. If the data in block 44 is changed from “DESERT” to “STREET”, all hashes of the consecutive blocks must be changed. This is because the <code>hash</code> of the block depends on the value of the <code>previousHash</code> (among other things).</p>
 
 <p><img src="/assets/Blockchain_integrity.png" alt="Blockchain integrity" /></p>
 
-<p>This is an especially important property when proof-of-work is introduced. The deeper the block is in the blockchain, the harder it is to modify it, since it would require modifications to every consequetive block.</p>
+<p>This is an especially important property when proof-of-work is introduced. The deeper the block is in the blockchain, the harder it is to modify it, since it would require modifications to every consecutive block.</p>
 
 <h3 id="genesis-block">Genesis block</h3>
 <p>Genesis block is the first block in the blockchain. It is the only block that has no <code>previousHash</code>. We will hard code the genesis block to the source code:</p>

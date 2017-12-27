@@ -99,7 +99,7 @@
 
 <p>We will use a library called <a href="https://github.com/indutny/elliptic">elliptic</a> for the public-key cryptography, which uses elliptic curves. (= <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a>)</p>
 
-<p>Conclusively, two different cryptographic funtions are used for different purposes in the cryptocurrency:</p>
+<p>Conclusively, two different cryptographic functions are used for different purposes in the cryptocurrency:</p>
 <ul>
   <li>Hash function (SHA256) for the Proof-of-work mining (The hash is also used to preserve block integrity)</li>
   <li>Public-key cryptography (ECDSA) for transactions (we’ll be implementing in this chapter )</li>
@@ -110,7 +110,7 @@
 
 <p>A valid public key is ‘04’ concatenated with a  64 byte string, e.g  <code>04bfcab8722991ae774db48f934ca79cfb7dd991229153b9f732ba5334aafcd8e7266e47076996b55a14bf9913ee3145ce0cfc1372ada8ada74bd287450313534a</code></p>
 
-<p>The public key can be derived from the private key. The public-key will be used as the ‘reveicer’ (= address) of the coins in a transaction.</p>
+<p>The public key can be derived from the private key. The public-key will be used as the ‘receiver’ (= address) of the coins in a transaction.</p>
 
 <h3 id="transactions-overview">Transactions overview</h3>
 <p>Before writing any code, let’s get an overview about the structure of transactions. Transactions consists of two components: <em>inputs</em> and <em>outputs</em>. Outputs specify where the coins are sent and inputs give a proof that the coins that are actually sent exists in the first place and are owned by the “sender”. Inputs always refer to an existing (unspent) output.</p>
@@ -132,7 +132,7 @@
 
 <h3 id="transaction-inputs">Transaction inputs</h3>
 
-<p>Transacation inputs (txIn) provide the information “where” the coins are coming from. Each txIn refer to an earlier output, from which the coins are ‘unlocked’, with the signature. These unlocked coins are now ‘available’ for the txOuts. The signature gives proof that only the user, that has the private-key of the referred public-key ( =address) could have created the transaction.</p>
+<p>Transaction inputs (txIn) provide the information “where” the coins are coming from. Each txIn refer to an earlier output, from which the coins are ‘unlocked’, with the signature. These unlocked coins are now ‘available’ for the txOuts. The signature gives proof that only the user, that has the private-key of the referred public-key ( =address) could have created the transaction.</p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">class</span> <span class="nx">TxIn</span> <span class="p">{</span>
     <span class="kr">public</span> <span class="nx">txOutId</span>: <span class="kt">string</span><span class="p">;</span>
@@ -221,7 +221,7 @@
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kd">let</span> <span class="nx">unspentTxOuts</span>: <span class="kt">UnspentTxOut</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span></code></pre></figure>
 
 <h3 id="updating-unspent-transaction-outputs">Updating unspent transaction outputs</h3>
-<p>Every time a new block is added to the chain, we must update our list of unspent transaction ouputs. This is because the new transactions will spend some of the existing transaction outputs and introduce new unspent outputs.</p>
+<p>Every time a new block is added to the chain, we must update our list of unspent transaction outputs. This is because the new transactions will spend some of the existing transaction outputs and introduce new unspent outputs.</p>
 
 <p>To handle this, we will first retrieve all new unspent transaction outputs (<code>newUnspentTxOuts</code>) from the new block:</p>
 
@@ -231,7 +231,7 @@
         <span class="p">})</span>
         <span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">b</span><span class="p">),</span> <span class="p">[]);</span></code></pre></figure>
 
-<p>We will also need to know which transaction outputs are consumend by the new transactions of the block (<code>consumedTxOuts</code>). This will be solved by examining the inputs of the new transactions:</p>
+<p>We will also need to know which transaction outputs are consumed by the new transactions of the block (<code>consumedTxOuts</code>). This will be solved by examining the inputs of the new transactions:</p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span>    <span class="kr">const</span> <span class="nx">consumedTxOuts</span>: <span class="kt">UnspentTxOut</span><span class="p">[]</span> <span class="o">=</span> <span class="nx">newTransactions</span>
         <span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">t</span><span class="p">.</span><span class="nx">txIns</span><span class="p">)</span>
@@ -304,7 +304,7 @@
 <h3 id="coinbase-transaction">Coinbase transaction</h3>
 <p>Transaction inputs must always refer to unspent transaction outputs, but from where does the initial coins come in to the blockchain? To solve this, a special type of transaction is introduced: <strong>coinbase transaction</strong></p>
 
-<p>The coinbase transaction contains only an ouput, but no inputs. This means that a coinbase transaction adds new coins to circulation. We specify the amount of the coinbase output to be 50 coins.</p>
+<p>The coinbase transaction contains only an output, but no inputs. This means that a coinbase transaction adds new coins to circulation. We specify the amount of the coinbase output to be 50 coins.</p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">const</span> <span class="nx">COINBASE_AMOUNT</span>: <span class="kt">number</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span></code></pre></figure>
 

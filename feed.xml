@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-12-27T22:16:10+02:00</updated><id>/</id><title type="html">Naivecoin: a tutorial for building a cryptocurrency</title><subtitle>Build your blockchain: A tutorial where a blockchain and a cryptocurrency are created from scratch using Typescript.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-12-27T22:51:15+02:00</updated><id>/</id><title type="html">Naivecoin: a tutorial for building a cryptocurrency</title><subtitle>Build your blockchain: A tutorial where a blockchain and a cryptocurrency are created from scratch using Typescript.
 </subtitle><entry><title type="html">#0: Introduction</title><link href="/jekyll/update/2017/07/15/chapter0.html" rel="alternate" type="text/html" title="#0: Introduction" /><published>2017-07-15T00:00:00+03:00</published><updated>2017-07-15T00:00:00+03:00</updated><id>/jekyll/update/2017/07/15/chapter0</id><content type="html" xml:base="/jekyll/update/2017/07/15/chapter0.html">&lt;p&gt;In this tutorial we will code from scratch some of the basic concepts that are needed for a working cryptocurrency. The angle is always to implement things in the most simplest way.&lt;/p&gt;
 
 &lt;p&gt;The project that we will build in this tutorial is called “Naivecoin”. The programming language is &lt;a href=&quot;https://www.typescriptlang.org/&quot;&gt;Typescript&lt;/a&gt;. The Naivecoin is in some terms an extension to the &lt;a href=&quot;https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54&quot;&gt;Naivechain - blockchain in 200 lines of code&lt;/a&gt;.&lt;/p&gt;
@@ -52,7 +52,7 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;block-hash&quot;&gt;Block hash&lt;/h3&gt;
-&lt;p&gt;The block hash is one of the most important property of the block. The hash is calculated over all data of the block. This means that if anything in the block changes, the original hash is no longer valid. The block hash can also be tought as the unique identifier of the block. For instance, blocks with same index can appear, but they all have unique hashes.&lt;/p&gt;
+&lt;p&gt;The block hash is one of the most important property of the block. The hash is calculated over all data of the block. This means that if anything in the block changes, the original hash is no longer valid. The block hash can also be thought as the unique identifier of the block. For instance, blocks with same index can appear, but they all have unique hashes.&lt;/p&gt;
 
 &lt;p&gt;We calculate the hash of the block using the following code:&lt;/p&gt;
 
@@ -61,13 +61,13 @@
 
 &lt;p&gt;It should be noted that the block hash has not yet nothing to do with &lt;a href=&quot;https://en.bitcoin.it/wiki/Mining&quot;&gt;mining&lt;/a&gt;, as there is no &lt;a href=&quot;https://en.wikipedia.org/wiki/Proof-of-work_system&quot;&gt;proof-of-work&lt;/a&gt; problem to solve. We use block hashes to preserve integrity of the block and to explicitly reference the previous block.&lt;/p&gt;
 
-&lt;p&gt;An important consequence of the properties &lt;code&gt;hash&lt;/code&gt; and &lt;code&gt;previousHash&lt;/code&gt; is that a block can’t be modified without changing the hash of &lt;em&gt;every&lt;/em&gt; consequentive block.&lt;/p&gt;
+&lt;p&gt;An important consequence of the properties &lt;code&gt;hash&lt;/code&gt; and &lt;code&gt;previousHash&lt;/code&gt; is that a block can’t be modified without changing the hash of &lt;em&gt;every&lt;/em&gt; consecutive block.&lt;/p&gt;
 
-&lt;p&gt;This is demonstrated in the example below. If the data in block 44 is changed from “DESERT” to “STREET”, all hashes of the consequentive blocks must be changed. This is because the &lt;code&gt;hash&lt;/code&gt; of the block depends on the value of the &lt;code&gt;previousHash&lt;/code&gt; (among other things).&lt;/p&gt;
+&lt;p&gt;This is demonstrated in the example below. If the data in block 44 is changed from “DESERT” to “STREET”, all hashes of the consecutive blocks must be changed. This is because the &lt;code&gt;hash&lt;/code&gt; of the block depends on the value of the &lt;code&gt;previousHash&lt;/code&gt; (among other things).&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/Blockchain_integrity.png&quot; alt=&quot;Blockchain integrity&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;This is an especially important property when proof-of-work is introduced. The deeper the block is in the blockchain, the harder it is to modify it, since it would require modifications to every consequetive block.&lt;/p&gt;
+&lt;p&gt;This is an especially important property when proof-of-work is introduced. The deeper the block is in the blockchain, the harder it is to modify it, since it would require modifications to every consecutive block.&lt;/p&gt;
 
 &lt;h3 id=&quot;genesis-block&quot;&gt;Genesis block&lt;/h3&gt;
 &lt;p&gt;Genesis block is the first block in the blockchain. It is the only block that has no &lt;code&gt;previousHash&lt;/code&gt;. We will hard code the genesis block to the source code:&lt;/p&gt;
@@ -245,7 +245,7 @@
 &lt;h3 id=&quot;difficulty-nonce-and-the-proof-of-work-puzzle&quot;&gt;Difficulty, nonce and the proof-of-work puzzle&lt;/h3&gt;
 &lt;p&gt;We will add two new properties to the block structure: &lt;code&gt;difficulty&lt;/code&gt; and &lt;code&gt;nonce&lt;/code&gt;. To understand the meaning of those, we must first introduce the Proof-of-work puzzle.&lt;/p&gt;
 
-&lt;p&gt;The Proof-of-work puzzle is to find a block hash, that has a specific number of zeroes prefixing it. The &lt;code&gt;difficulty&lt;/code&gt; property defines &lt;strong&gt;how many prefixing zeroes the block hash must have&lt;/strong&gt;, in order for the block to be valid. The prefixing zeroes are checked from the binary format of the hash.&lt;/p&gt;
+&lt;p&gt;The Proof-of-work puzzle is to find a block hash, that has a specific number of zeros prefixing it. The &lt;code&gt;difficulty&lt;/code&gt; property defines &lt;strong&gt;how many prefixing zeros the block hash must have&lt;/strong&gt;, in order for the block to be valid. The prefixing zeros are checked from the binary format of the hash.&lt;/p&gt;
 
 &lt;p&gt;Below are some examples of valid and non-valid hashes for various difficulties:&lt;/p&gt;
 
@@ -304,7 +304,7 @@
 &lt;p&gt;When the block is found, it is broadcasted to the network as was the case in chapter1.&lt;/p&gt;
 
 &lt;h3 id=&quot;consensus-on-the-difficulty&quot;&gt;Consensus on the difficulty&lt;/h3&gt;
-&lt;p&gt;We have now the means to find and verify the hash for a given difficulty, but how is the difficulty determined? There must be a way for the nodes to agree what the current difficulty is. For this we introduce some new rules that we use to calcuate the &lt;em&gt;current&lt;/em&gt;  difficulty of the network.&lt;/p&gt;
+&lt;p&gt;We have now the means to find and verify the hash for a given difficulty, but how is the difficulty determined? There must be a way for the nodes to agree what the current difficulty is. For this we introduce some new rules that we use to calculate the &lt;em&gt;current&lt;/em&gt;  difficulty of the network.&lt;/p&gt;
 
 &lt;p&gt;Lets define the following new constants for the network:&lt;/p&gt;
 &lt;ul&gt;
@@ -312,7 +312,7 @@
   &lt;li&gt;&lt;code&gt;DIFFICULTY_ADJUSTMENT_INTERVAL&lt;/code&gt;, defines how often the difficulty should adjust to the increasing or decreasing network hashrate. (in Bitcoin this value is 2016 blocks)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We will set the block generation interval to 10s and difficulty adjustement to 10 blocks. These constants &lt;strong&gt;do not change&lt;/strong&gt; over time and they are hard coded.&lt;/p&gt;
+&lt;p&gt;We will set the block generation interval to 10s and difficulty adjustment to 10 blocks. These constants &lt;strong&gt;do not change&lt;/strong&gt; over time and they are hard coded.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// in seconds&lt;/span&gt;
 &lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BLOCK_GENERATION_INTERVAL&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -364,14 +364,14 @@
 &lt;h3 id=&quot;cumulative-difficulty&quot;&gt;Cumulative difficulty&lt;/h3&gt;
 &lt;p&gt;In the chapter1 version of the blockchain, we chose always the “longest” blockchain to be the valid. This must change now that difficulty is introduced. For now on the “correct” chain is not the “longest” chain, but the chain with the &lt;strong&gt;most cumulative difficulty&lt;/strong&gt;. In other words, the correct chain is the chain which required most resources (= hashRate * time) to produce.&lt;/p&gt;
 
-&lt;p&gt;To get the cumulative difficulty of a chain we calculate &lt;code&gt;2^difficulty&lt;/code&gt; for each block and take a sum of all those numbers. We have to use the &lt;code&gt;2^difficulty&lt;/code&gt; as we chose the difficulty to represent the number of zeroes that must prefix the hash in binary format. For instance, if we compare the difficulties of 5 and 11, it requires 2^(11-5) = 2^6 times more work to find a block with latter difficulty.&lt;/p&gt;
+&lt;p&gt;To get the cumulative difficulty of a chain we calculate &lt;code&gt;2^difficulty&lt;/code&gt; for each block and take a sum of all those numbers. We have to use the &lt;code&gt;2^difficulty&lt;/code&gt; as we chose the difficulty to represent the number of zeros that must prefix the hash in binary format. For instance, if we compare the difficulties of 5 and 11, it requires 2^(11-5) = 2^6 times more work to find a block with latter difficulty.&lt;/p&gt;
 
 &lt;p&gt;In the below example, the “Chain B” is the “correct” chain although it has fever blocks:
 &lt;img src=&quot;/assets/Cumulative_difficulties.png&quot; alt=&quot;Cumulative difficulty&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Only the difficulty of the block matters, not the actual hash (given the hash is valid). For example, if the difficulty is 4 and the block hash is 000000a34c… (= also satisfying the difficulty of 6), only the difficulty of 4 is taken into account when calculating the cumulative difficulty.&lt;/p&gt;
 
-&lt;p&gt;This property is also known as “Nakamoto consensus” and it is one of the most important inventions Satoshi made, when s/he invented Bitcoin. In case of forks, miners must choose on which chain the they decide put their current resources (= hashRate). As it is in the interest of the miners to produce such block that will be included in the blockchain, the miners are incentiviced to eventually to choose the same chain.&lt;/p&gt;
+&lt;p&gt;This property is also known as “Nakamoto consensus” and it is one of the most important inventions Satoshi made, when s/he invented Bitcoin. In case of forks, miners must choose on which chain the they decide put their current resources (= hashRate). As it is in the interest of the miners to produce such block that will be included in the blockchain, the miners are incentivized to eventually to choose the same chain.&lt;/p&gt;
 
 &lt;h3 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h3&gt;
 &lt;p&gt;An important property that a Proof-of-work puzzle must have is that it is difficult to solve, but easy to verify. Finding specific SHA256 hashes is a good and simple example of such problem.&lt;/p&gt;
@@ -396,7 +396,7 @@
 
 &lt;p&gt;We will use a library called &lt;a href=&quot;https://github.com/indutny/elliptic&quot;&gt;elliptic&lt;/a&gt; for the public-key cryptography, which uses elliptic curves. (= &lt;a href=&quot;https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm&quot;&gt;ECDSA&lt;/a&gt;)&lt;/p&gt;
 
-&lt;p&gt;Conclusively, two different cryptographic funtions are used for different purposes in the cryptocurrency:&lt;/p&gt;
+&lt;p&gt;Conclusively, two different cryptographic functions are used for different purposes in the cryptocurrency:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Hash function (SHA256) for the Proof-of-work mining (The hash is also used to preserve block integrity)&lt;/li&gt;
   &lt;li&gt;Public-key cryptography (ECDSA) for transactions (we’ll be implementing in this chapter )&lt;/li&gt;
@@ -407,7 +407,7 @@
 
 &lt;p&gt;A valid public key is ‘04’ concatenated with a  64 byte string, e.g  &lt;code&gt;04bfcab8722991ae774db48f934ca79cfb7dd991229153b9f732ba5334aafcd8e7266e47076996b55a14bf9913ee3145ce0cfc1372ada8ada74bd287450313534a&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;The public key can be derived from the private key. The public-key will be used as the ‘reveicer’ (= address) of the coins in a transaction.&lt;/p&gt;
+&lt;p&gt;The public key can be derived from the private key. The public-key will be used as the ‘receiver’ (= address) of the coins in a transaction.&lt;/p&gt;
 
 &lt;h3 id=&quot;transactions-overview&quot;&gt;Transactions overview&lt;/h3&gt;
 &lt;p&gt;Before writing any code, let’s get an overview about the structure of transactions. Transactions consists of two components: &lt;em&gt;inputs&lt;/em&gt; and &lt;em&gt;outputs&lt;/em&gt;. Outputs specify where the coins are sent and inputs give a proof that the coins that are actually sent exists in the first place and are owned by the “sender”. Inputs always refer to an existing (unspent) output.&lt;/p&gt;
@@ -429,7 +429,7 @@
 
 &lt;h3 id=&quot;transaction-inputs&quot;&gt;Transaction inputs&lt;/h3&gt;
 
-&lt;p&gt;Transacation inputs (txIn) provide the information “where” the coins are coming from. Each txIn refer to an earlier output, from which the coins are ‘unlocked’, with the signature. These unlocked coins are now ‘available’ for the txOuts. The signature gives proof that only the user, that has the private-key of the referred public-key ( =address) could have created the transaction.&lt;/p&gt;
+&lt;p&gt;Transaction inputs (txIn) provide the information “where” the coins are coming from. Each txIn refer to an earlier output, from which the coins are ‘unlocked’, with the signature. These unlocked coins are now ‘available’ for the txOuts. The signature gives proof that only the user, that has the private-key of the referred public-key ( =address) could have created the transaction.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TxIn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kr&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;txOutId&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -518,7 +518,7 @@
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;unspentTxOuts&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;UnspentTxOut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;updating-unspent-transaction-outputs&quot;&gt;Updating unspent transaction outputs&lt;/h3&gt;
-&lt;p&gt;Every time a new block is added to the chain, we must update our list of unspent transaction ouputs. This is because the new transactions will spend some of the existing transaction outputs and introduce new unspent outputs.&lt;/p&gt;
+&lt;p&gt;Every time a new block is added to the chain, we must update our list of unspent transaction outputs. This is because the new transactions will spend some of the existing transaction outputs and introduce new unspent outputs.&lt;/p&gt;
 
 &lt;p&gt;To handle this, we will first retrieve all new unspent transaction outputs (&lt;code&gt;newUnspentTxOuts&lt;/code&gt;) from the new block:&lt;/p&gt;
 
@@ -528,7 +528,7 @@
         &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;concat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;We will also need to know which transaction outputs are consumend by the new transactions of the block (&lt;code&gt;consumedTxOuts&lt;/code&gt;). This will be solved by examining the inputs of the new transactions:&lt;/p&gt;
+&lt;p&gt;We will also need to know which transaction outputs are consumed by the new transactions of the block (&lt;code&gt;consumedTxOuts&lt;/code&gt;). This will be solved by examining the inputs of the new transactions:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;consumedTxOuts&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;UnspentTxOut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newTransactions&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;txIns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -601,7 +601,7 @@
 &lt;h3 id=&quot;coinbase-transaction&quot;&gt;Coinbase transaction&lt;/h3&gt;
 &lt;p&gt;Transaction inputs must always refer to unspent transaction outputs, but from where does the initial coins come in to the blockchain? To solve this, a special type of transaction is introduced: &lt;strong&gt;coinbase transaction&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;The coinbase transaction contains only an ouput, but no inputs. This means that a coinbase transaction adds new coins to circulation. We specify the amount of the coinbase output to be 50 coins.&lt;/p&gt;
+&lt;p&gt;The coinbase transaction contains only an output, but no inputs. This means that a coinbase transaction adds new coins to circulation. We specify the amount of the coinbase output to be 50 coins.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;COINBASE_AMOUNT&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -654,7 +654,7 @@
   &lt;li&gt;Send coins to other addresses&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;All of the above must work so that the end user must not need to understand how txIns or txOuts work. Just like in e.g. Bitcoin: you send coins to addressess and publish your own address where other people can send coins.&lt;/p&gt;
+&lt;p&gt;All of the above must work so that the end user must not need to understand how txIns or txOuts work. Just like in e.g. Bitcoin: you send coins to addresses and publish your own address where other people can send coins.&lt;/p&gt;
 
 &lt;p&gt;The full code that will be implemented in this chapter can be found &lt;a href=&quot;https://github.com/lhartikk/naivecoin/tree/chapter4&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
@@ -702,7 +702,7 @@
         &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;As demonstrated in the code, the private key is not needed to query the balance of the address. This consequenctly means that anyone can solve the balance of a given address.&lt;/p&gt;
+&lt;p&gt;As demonstrated in the code, the private key is not needed to query the balance of the address. This consequently means that anyone can solve the balance of a given address.&lt;/p&gt;
 
 &lt;h3 id=&quot;generating-transactions&quot;&gt;Generating transactions&lt;/h3&gt;
 &lt;p&gt;When sending coins, the user should be able to ignore the concepts of transaction inputs and outputs. But what should happen if the user A has balance of 50 coins, that is in a single transaction output and the user wants to send 10 coins to user B?&lt;/p&gt;
@@ -713,7 +713,7 @@
 
 &lt;p&gt;Let’s play out a bit more complex transaction scenario:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;User C has initally 0 coins&lt;/li&gt;
+  &lt;li&gt;User C has initially 0 coins&lt;/li&gt;
   &lt;li&gt;User C receives 3 transactions worth of 10, 20 and 30 coins&lt;/li&gt;
   &lt;li&gt;User C wants to send 55 coins to user D. What will the transaction look like?&lt;/li&gt;
 &lt;/ol&gt;
@@ -795,7 +795,7 @@
 &lt;p&gt;The code implemented in this chapter can be found &lt;a href=&quot;https://github.com/lhartikk/naivecoin/tree/chapter4&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/jekyll/update/2017/07/10/chapter5.html&quot;&gt;To chapter5&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Overview The goal of the wallet is to create a more abstract interface for the end user.</summary></entry><entry><title type="html">#5: Transaction relying</title><link href="/jekyll/update/2017/07/10/chapter5.html" rel="alternate" type="text/html" title="#5: Transaction relying" /><published>2017-07-10T00:00:00+03:00</published><updated>2017-07-10T00:00:00+03:00</updated><id>/jekyll/update/2017/07/10/chapter5</id><content type="html" xml:base="/jekyll/update/2017/07/10/chapter5.html">&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
-&lt;p&gt;In this chapter we will implement the relaying of such transactions, that are not yet included in the blockchain. In bitcoin, these transaction are also known as “unconfirmed transactions”. Typically, when someone wants to inlude a transaction to the blockchain (= send coins to some address ) he broadcasts the transaction to the network and hopefully some node will mine the transaction to the blockchain.&lt;/p&gt;
+&lt;p&gt;In this chapter we will implement the relaying of such transactions, that are not yet included in the blockchain. In bitcoin, these transaction are also known as “unconfirmed transactions”. Typically, when someone wants to include a transaction to the blockchain (= send coins to some address ) he broadcasts the transaction to the network and hopefully some node will mine the transaction to the blockchain.&lt;/p&gt;
 
 &lt;p&gt;This feature is very important for a working cryptocurrency, since it means you don’t need to mine a block yourself, in order to include a transaction to the blockchain.&lt;/p&gt;
 
@@ -831,10 +831,10 @@
 
 &lt;ul&gt;
   &lt;li&gt;When a node receives an unconfirmed transaction it has not seen before, it will broadcast the full transaction pool to all peers.&lt;/li&gt;
-  &lt;li&gt;When a node first connects to an other node, it will query for the transaction pool of that node.&lt;/li&gt;
+  &lt;li&gt;When a node first connects to another node, it will query for the transaction pool of that node.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We will add two new MessageTypes to serve this purporse: &lt;code&gt;QUERY_TRANSACTION_POOL&lt;/code&gt; and &lt;code&gt;RESPONSE_TRANSACTION_POOL&lt;/code&gt;. The MessageType enum will now look now like this:&lt;/p&gt;
+&lt;p&gt;We will add two new MessageTypes to serve this purpose: &lt;code&gt;QUERY_TRANSACTION_POOL&lt;/code&gt; and &lt;code&gt;RESPONSE_TRANSACTION_POOL&lt;/code&gt;. The MessageType enum will now look now like this:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MessageType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;QUERY_LATEST&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -874,7 +874,7 @@
 &lt;h3 id=&quot;validating-received-unconfirmed-transactions&quot;&gt;Validating received unconfirmed transactions&lt;/h3&gt;
 &lt;p&gt;As the peers can send us any kind of transactions, we must validate the transactions before we can add them to the transaction pool. All of the existing transaction validation rules apply. For instance, the transaction must be correctly formatted, and the transaction inputs, outputs and signatures must match.&lt;/p&gt;
 
-&lt;p&gt;In addition to the existing rules, we add a new rule: a transaction can not be added to the pool if any of the transaction inputs are already found in the existing transaction pool. This new rule is embodied in the following code:&lt;/p&gt;
+&lt;p&gt;In addition to the existing rules, we add a new rule: a transaction cannot be added to the pool if any of the transaction inputs are already found in the existing transaction pool. This new rule is embodied in the following code:&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ts&quot; data-lang=&quot;ts&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;isValidTxForPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tx&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;Transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;aTtransactionPool&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;Transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;txPoolIns&lt;/span&gt;: &lt;span class=&quot;kt&quot;&gt;TxIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getTxPoolIns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;aTtransactionPool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -940,7 +940,7 @@
 
 &lt;p&gt;In the &lt;a href=&quot;/jekyll/update/2017/07/09/chapter6.html&quot;&gt;next chapter&lt;/a&gt; we will create some UI for the wallet and a simple blockchain explorer.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;/jekyll/update/2017/07/09/chapter6.html&quot;&gt;To chapter6&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Overview In this chapter we will implement the relaying of such transactions, that are not yet included in the blockchain. In bitcoin, these transaction are also known as “unconfirmed transactions”. Typically, when someone wants to inlude a transaction to the blockchain (= send coins to some address ) he broadcasts the transaction to the network and hopefully some node will mine the transaction to the blockchain.</summary></entry><entry><title type="html">#6: Wallet UI and blockchain explorer</title><link href="/jekyll/update/2017/07/09/chapter6.html" rel="alternate" type="text/html" title="#6: Wallet UI and blockchain explorer" /><published>2017-07-09T00:00:00+03:00</published><updated>2017-07-09T00:00:00+03:00</updated><id>/jekyll/update/2017/07/09/chapter6</id><content type="html" xml:base="/jekyll/update/2017/07/09/chapter6.html">&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;/jekyll/update/2017/07/09/chapter6.html&quot;&gt;To chapter6&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Overview In this chapter we will implement the relaying of such transactions, that are not yet included in the blockchain. In bitcoin, these transaction are also known as “unconfirmed transactions”. Typically, when someone wants to include a transaction to the blockchain (= send coins to some address ) he broadcasts the transaction to the network and hopefully some node will mine the transaction to the blockchain.</summary></entry><entry><title type="html">#6: Wallet UI and blockchain explorer</title><link href="/jekyll/update/2017/07/09/chapter6.html" rel="alternate" type="text/html" title="#6: Wallet UI and blockchain explorer" /><published>2017-07-09T00:00:00+03:00</published><updated>2017-07-09T00:00:00+03:00</updated><id>/jekyll/update/2017/07/09/chapter6</id><content type="html" xml:base="/jekyll/update/2017/07/09/chapter6.html">&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
 &lt;p&gt;In this chapter we will add an UI for the wallet and create blockchain explorer for our blockchain. Our node already exposes its functionalities with HTTP endpoints, so we will create a web page that makes requests to those endpoints and visualizes the results.&lt;/p&gt;
 
 &lt;p&gt;To achieve all this, we must add some additional endpoints and logic your node, for instance:&lt;/p&gt;

@@ -93,7 +93,7 @@
   <li>Send coins to other addresses</li>
 </ul>
 
-<p>All of the above must work so that the end user must not need to understand how txIns or txOuts work. Just like in e.g. Bitcoin: you send coins to addressess and publish your own address where other people can send coins.</p>
+<p>All of the above must work so that the end user must not need to understand how txIns or txOuts work. Just like in e.g. Bitcoin: you send coins to addresses and publish your own address where other people can send coins.</p>
 
 <p>The full code that will be implemented in this chapter can be found <a href="https://github.com/lhartikk/naivecoin/tree/chapter4">here</a>.</p>
 
@@ -141,7 +141,7 @@
         <span class="p">.</span><span class="nx">sum</span><span class="p">();</span>
 <span class="p">};</span></code></pre></figure>
 
-<p>As demonstrated in the code, the private key is not needed to query the balance of the address. This consequenctly means that anyone can solve the balance of a given address.</p>
+<p>As demonstrated in the code, the private key is not needed to query the balance of the address. This consequently means that anyone can solve the balance of a given address.</p>
 
 <h3 id="generating-transactions">Generating transactions</h3>
 <p>When sending coins, the user should be able to ignore the concepts of transaction inputs and outputs. But what should happen if the user A has balance of 50 coins, that is in a single transaction output and the user wants to send 10 coins to user B?</p>
@@ -152,7 +152,7 @@
 
 <p>Let’s play out a bit more complex transaction scenario:</p>
 <ol>
-  <li>User C has initally 0 coins</li>
+  <li>User C has initially 0 coins</li>
   <li>User C receives 3 transactions worth of 10, 20 and 30 coins</li>
   <li>User C wants to send 55 coins to user D. What will the transaction look like?</li>
 </ol>

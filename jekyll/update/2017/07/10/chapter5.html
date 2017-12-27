@@ -84,7 +84,7 @@
 
   <div class="post-content" itemprop="articleBody">
     <h3 id="overview">Overview</h3>
-<p>In this chapter we will implement the relaying of such transactions, that are not yet included in the blockchain. In bitcoin, these transaction are also known as “unconfirmed transactions”. Typically, when someone wants to inlude a transaction to the blockchain (= send coins to some address ) he broadcasts the transaction to the network and hopefully some node will mine the transaction to the blockchain.</p>
+<p>In this chapter we will implement the relaying of such transactions, that are not yet included in the blockchain. In bitcoin, these transaction are also known as “unconfirmed transactions”. Typically, when someone wants to include a transaction to the blockchain (= send coins to some address ) he broadcasts the transaction to the network and hopefully some node will mine the transaction to the blockchain.</p>
 
 <p>This feature is very important for a working cryptocurrency, since it means you don’t need to mine a block yourself, in order to include a transaction to the blockchain.</p>
 
@@ -120,10 +120,10 @@
 
 <ul>
   <li>When a node receives an unconfirmed transaction it has not seen before, it will broadcast the full transaction pool to all peers.</li>
-  <li>When a node first connects to an other node, it will query for the transaction pool of that node.</li>
+  <li>When a node first connects to another node, it will query for the transaction pool of that node.</li>
 </ul>
 
-<p>We will add two new MessageTypes to serve this purporse: <code>QUERY_TRANSACTION_POOL</code> and <code>RESPONSE_TRANSACTION_POOL</code>. The MessageType enum will now look now like this:</p>
+<p>We will add two new MessageTypes to serve this purpose: <code>QUERY_TRANSACTION_POOL</code> and <code>RESPONSE_TRANSACTION_POOL</code>. The MessageType enum will now look now like this:</p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">enum</span> <span class="nx">MessageType</span> <span class="p">{</span>
     <span class="nx">QUERY_LATEST</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
@@ -163,7 +163,7 @@
 <h3 id="validating-received-unconfirmed-transactions">Validating received unconfirmed transactions</h3>
 <p>As the peers can send us any kind of transactions, we must validate the transactions before we can add them to the transaction pool. All of the existing transaction validation rules apply. For instance, the transaction must be correctly formatted, and the transaction inputs, outputs and signatures must match.</p>
 
-<p>In addition to the existing rules, we add a new rule: a transaction can not be added to the pool if any of the transaction inputs are already found in the existing transaction pool. This new rule is embodied in the following code:</p>
+<p>In addition to the existing rules, we add a new rule: a transaction cannot be added to the pool if any of the transaction inputs are already found in the existing transaction pool. This new rule is embodied in the following code:</p>
 
 <figure class="highlight"><pre><code class="language-ts" data-lang="ts"><span></span><span class="kr">const</span> <span class="nx">isValidTxForPool</span> <span class="o">=</span> <span class="p">(</span><span class="nx">tx</span>: <span class="kt">Transaction</span><span class="p">,</span> <span class="nx">aTtransactionPool</span>: <span class="kt">Transaction</span><span class="p">[])</span><span class="o">:</span> <span class="kr">boolean</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kr">const</span> <span class="nx">txPoolIns</span>: <span class="kt">TxIn</span><span class="p">[]</span> <span class="o">=</span> <span class="nx">getTxPoolIns</span><span class="p">(</span><span class="nx">aTtransactionPool</span><span class="p">);</span>
