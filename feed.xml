@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-12-29T19:05:07+02:00</updated><id>/</id><title type="html">Naivecoin: a tutorial for building a cryptocurrency</title><subtitle>Build your blockchain: A tutorial where a blockchain and a cryptocurrency are created from scratch using Typescript.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-12-31T17:35:23+02:00</updated><id>/</id><title type="html">Naivecoin: a tutorial for building a cryptocurrency</title><subtitle>Build your blockchain: A tutorial where a blockchain and a cryptocurrency are created from scratch using Typescript.
 </subtitle><entry><title type="html">#0: Introduction</title><link href="/jekyll/update/2017/07/15/chapter0.html" rel="alternate" type="text/html" title="#0: Introduction" /><published>2017-07-15T00:00:00+03:00</published><updated>2017-07-15T00:00:00+03:00</updated><id>/jekyll/update/2017/07/15/chapter0</id><content type="html" xml:base="/jekyll/update/2017/07/15/chapter0.html">&lt;p&gt;In this tutorial we will code from scratch some of the basic concepts that are needed for a working cryptocurrency. The angle is always to implement things in the most simplest way.&lt;/p&gt;
 
 &lt;p&gt;The project that we will build in this tutorial is called “Naivecoin”. The programming language is &lt;a href=&quot;https://www.typescriptlang.org/&quot;&gt;Typescript&lt;/a&gt;. The Naivecoin is in some terms an extension to the &lt;a href=&quot;https://medium.com/@lhartikk/a-blockchain-in-200-lines-of-code-963cc1cc0e54&quot;&gt;Naivechain - blockchain in 200 lines of code&lt;/a&gt;.&lt;/p&gt;
@@ -949,7 +949,7 @@
   &lt;li&gt;Query information about a specific address&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;The full code implemented in this chapter can be found here and the UI part can be found here.&lt;/p&gt;
+&lt;p&gt;The full code implemented in this chapter can be found &lt;a href=&quot;https://github.com/lhartikk/naivecoin/tree/chapter6&quot;&gt;here&lt;/a&gt; and the UI part can be found &lt;a href=&quot;https://github.com/lhartikk/naivecoin-ui&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;new-endpoints&quot;&gt;New endpoints&lt;/h3&gt;
 
@@ -981,7 +981,7 @@
 &lt;p&gt;We could also add information about spent transaction outputs for a given address in order to visualize full history of a given address.&lt;/p&gt;
 
 &lt;h3 id=&quot;frontend-techs&quot;&gt;Frontend techs&lt;/h3&gt;
-&lt;p&gt;We will use &lt;a href=&quot;https://vuejs.org&quot;&gt;Vue.js&lt;/a&gt; to implement the UI parts of the wallet and the blockchain explorer. Since this tutorial is not about frontend development, we will not walk through the frontent part in terms of code. The repository for the UI code can be found &lt;a href=&quot;https://bitbucket.org/lapanen13/naivecoin-vue&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We will use &lt;a href=&quot;https://vuejs.org&quot;&gt;Vue.js&lt;/a&gt; to implement the UI parts of the wallet and the blockchain explorer. Since this tutorial is not about frontend development, we will not walk through the frontent part in terms of code. The repository for the UI code can be found &lt;a href=&quot;https://github.com/lhartikk/naivecoin-ui&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;blockchain-explorer&quot;&gt;Blockchain explorer&lt;/h3&gt;
 &lt;p&gt;Blockchain explorer is a website which is used to visualize the state of the blockchain. A typical use case for a blockchain explorer is to easily check the balance of a given address or verify that a given transaction is included to the blockchain.&lt;/p&gt;
